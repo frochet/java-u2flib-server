@@ -1,4 +1,4 @@
-package com.yubico.u2f;
+ package com.yubico.u2f;
 
 import com.yubico.u2f.exceptions.U2fBadConfigurationException;
 import org.junit.Test;

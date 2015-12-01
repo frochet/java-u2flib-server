@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Yubico.
+   * Copyright 2014 Yubico.
  * Copyright 2014 Google Inc. All rights reserved.
  *
  * Use of this source code is governed by a BSD-style

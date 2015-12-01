@@ -29,14 +29,14 @@ public class Resource {
     public static final String APP_ID = "https://localhost:8443";
     public static final String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerIndex.html'>Register</a></li><li><a href='/assets/loginIndex.html'>Login</a></li></ul>";
 
-    private final Map<String, String> requestStorage = new HashMap<String, String>();
-    private final LoadingCache<String, Map<String, String>> userStorage = CacheBuilder.newBuilder().build(new CacheLoader<String, Map<String, String>>() {
+    protected final Map<String, String> requestStorage = new HashMap<String, String>();
+    protected final LoadingCache<String, Map<String, String>> userStorage = CacheBuilder.newBuilder().build(new CacheLoader<String, Map<String, String>>() {
         @Override
         public Map<String, String> load(String key) throws Exception {
             return new HashMap<String, String>();
         }
     });
-    private final U2F u2f = new U2F();
+    protected final U2F u2f = new U2F();
 
     @Path("startRegistration")
     @GET
@@ -84,7 +84,7 @@ public class Resource {
         return "<p>Successfully authenticated!<p>" + NAVIGATION_MENU;
     }
 
-    private Iterable<DeviceRegistration> getRegistrations(String username) {
+    protected Iterable<DeviceRegistration> getRegistrations(String username) {
         List<DeviceRegistration> registrations = new ArrayList<DeviceRegistration>();
         for (String serialized : userStorage.getUnchecked(username).values()) {
             registrations.add(DeviceRegistration.fromJson(serialized));
@@ -92,7 +92,7 @@ public class Resource {
         return registrations;
     }
 
-    private void addRegistration(String username, DeviceRegistration registration) {
+    protected void addRegistration(String username, DeviceRegistration registration) {
         userStorage.getUnchecked(username).put(registration.getKeyHandle(), registration.toJson());
     }
 }

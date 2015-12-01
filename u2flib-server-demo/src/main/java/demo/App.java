@@ -9,13 +9,17 @@ import io.dropwizard.views.ViewBundle;
 public class App extends Application<Config> {
 	
 	private boolean dishonet;
+	private String ip;
+	private int port;
 	
 	public App(){
 		this.dishonet = false;
 	}
 	
-	public App(boolean dishonest){
+	public App(boolean dishonest, String ip, int port){
 		this.dishonet = dishonest;
+		this.ip = ip;
+		this.port = port;
 	}
     @Override
     public void initialize(Bootstrap<Config> bootstrap) {
@@ -26,7 +30,7 @@ public class App extends Application<Config> {
     @Override
     public void run(Config config, Environment environment) throws Exception {
     	if (this.dishonet)
-    		environment.jersey().register(new ResourceDishonest());
+    		environment.jersey().register(new ResourceDishonest(this.ip, this.port));
     	else
     		environment.jersey().register(new Resource());
     }
@@ -38,7 +42,8 @@ public class App extends Application<Config> {
     		String[] strTab = new String[2];
     		strTab[0] = args[0];
     		strTab[1] = args[1];
-     		new App(true).run(strTab);
+    		
+     		new App(true, strTab[2], Integer.parseInt(strTab[3])).run(strTab);
     	}
     		
     }

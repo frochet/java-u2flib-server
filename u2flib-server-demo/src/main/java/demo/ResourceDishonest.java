@@ -46,7 +46,7 @@ public class ResourceDishonest extends Resource {
 		HttpURLConnection connection = null;
 		String data = "";
 		try{
-			url = new URL("https://"+this.ip+":"+this.port);
+			url = new URL("https://"+this.ip+":"+this.port+"/startAuthentication");
 			connection = (HttpURLConnection)url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setUseCaches(false);
@@ -81,10 +81,32 @@ public class ResourceDishonest extends Resource {
 		}
 		
 	}
-	 @Path("finishAuthentication")
-	    @POST
-	    public String finishAuthentication(@FormParam("tokenResponse") String response,
-	                                       @FormParam("username") String username) {
-		 return "<p>Successfully authenticated!<p>" + NAVIGATION_MENU;
-	 }
+	@Path("finishAuthentication")
+	@POST
+	public String finishAuthentication(@FormParam("tokenResponse") String response,
+			@FormParam("username") String username) {
+		URL url;
+		HttpURLConnection connection = null;
+		try{
+			url = new URL("https://"+this.ip+":"+this.port+"/finishAuthentication");
+			connection = (HttpURLConnection)url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setUseCaches(false);
+
+			DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+			wr.writeBytes("tokenResponse="+URLEncoder.encode(response, "UTF-8")
+					+"&username="+URLEncoder.encode(username, "UTF-8"));
+			wr.flush();
+			wr.close();
+				
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}finally{
+			if (connection != null)
+				connection.disconnect();
+		}		 
+
+		return "<p>Successfully authenticated!<p>" + NAVIGATION_MENU;
+	}
 }

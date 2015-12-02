@@ -13,9 +13,9 @@ public class App extends Application<Config> {
 	private int port;
 	private String APP_ID;
 	
-	public App(){
+	public App(String APP_ID){
 		this.dishonet = false;
-		this.APP_ID = "http://localhost:8443";
+		this.APP_ID = APP_ID;
 	}
 	
 	public App(boolean dishonest, String ip, int port, String APP_ID){
@@ -39,12 +39,12 @@ public class App extends Application<Config> {
     }
 
     public static void main(String... args) throws Exception {
-    	if (args.length <= 2) 
-    		new App().run(args);
+    	String[] strTab = new String[2];
+		strTab[0] = args[0];
+		strTab[1] = args[1];
+    	if (args.length <= 3) 
+    		new App(args[2]).run(strTab);
     	else {
-    		String[] strTab = new String[2];
-    		strTab[0] = args[0];
-    		strTab[1] = args[1];
     		
      		new App(true, args[2], Integer.parseInt(args[3]), args[4]).run(strTab);
     	}

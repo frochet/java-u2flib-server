@@ -82,7 +82,7 @@ public class Resource {
             userStorage.getUnchecked(username).put(registration.getKeyHandle(), registration.toJson());
         }
         this.authCounter++;
-        return "<p>Successfully authenticatedfor the "+this.authCounter+"th times!<p>" + NAVIGATION_MENU;
+        return "<p>Successfully authenticated for the "+this.authCounter+"th times!<p>" + NAVIGATION_MENU;
     }
 
     protected Iterable<DeviceRegistration> getRegistrations(String username) {

@@ -1,7 +1,7 @@
 server:
   applicationConnectors:
     - type: https
-      port: 443
+      port: 8443
       keyStorePath: keystore.jks
       keyStorePassword: p@ssw0rd
       validateCerts: false

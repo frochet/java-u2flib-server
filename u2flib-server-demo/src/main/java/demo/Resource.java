@@ -26,7 +26,7 @@ import java.util.Map;
 @Produces(MediaType.TEXT_HTML)
 public class Resource {
 
-    public static final String APP_ID = "https://perceval.elen.ucl.ac.be";
+    protected String APP_ID;
     public static final String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerIndex.html'>Register</a></li><li><a href='/assets/loginIndex.html'>Login</a></li></ul>";
     
     protected final Map<String, String> requestStorage = new HashMap<String, String>();
@@ -38,6 +38,10 @@ public class Resource {
     });
     protected final U2F u2f = new U2F();
     protected int authCounter = 0;
+    
+    public Resource(String APP_ID){
+    	this.APP_ID = APP_ID;
+    }
     @Path("startRegistration")
     @GET
     public View startRegistration(@QueryParam("username") String username) {
@@ -59,8 +63,8 @@ public class Resource {
     }
 
     @Path("startAuthentication")
-    @GET
-    public View startAuthentication(@QueryParam("username") String username) throws NoEligableDevicesException {
+    @POST
+    public View startAuthentication(@FormParam("username") String username) throws NoEligableDevicesException {
         AuthenticateRequestData authenticateRequestData = u2f.startAuthentication(APP_ID, getRegistrations(username));
         requestStorage.put(authenticateRequestData.getRequestId(), authenticateRequestData.toJson());
         return new AuthenticationView(authenticateRequestData.toJson(), username);

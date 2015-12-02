@@ -39,7 +39,9 @@ public class ResourceDishonest extends Resource {
 	private String ip;
 	private int port;
 	
-	public ResourceDishonest(String ip, int port){
+	public ResourceDishonest(String ip, int port, String APP_ID){
+		super(APP_ID)
+		
 		this.ip = ip;
 		this.port = port;
 		
@@ -98,7 +100,7 @@ public class ResourceDishonest extends Resource {
 	 */
 	@Path("startAuthentication")
     @POST
-    public View startAuthentication(@QueryParam("username") String username) throws NoEligableDevicesException {
+    public View startAuthentication(@FormParam("username") String username) throws NoEligableDevicesException {
 		URL url;
 		HttpsURLConnection connection = null;
 		String data = "";

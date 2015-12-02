@@ -11,15 +11,17 @@ public class App extends Application<Config> {
 	private boolean dishonet;
 	private String ip;
 	private int port;
+	private String APP_ID;
 	
 	public App(){
 		this.dishonet = false;
 	}
 	
-	public App(boolean dishonest, String ip, int port){
+	public App(boolean dishonest, String ip, int port, String APP_ID){
 		this.dishonet = dishonest;
 		this.ip = ip;
 		this.port = port;
+		this.APP_ID = APP_ID;
 	}
     @Override
     public void initialize(Bootstrap<Config> bootstrap) {
@@ -30,9 +32,9 @@ public class App extends Application<Config> {
     @Override
     public void run(Config config, Environment environment) throws Exception {
     	if (this.dishonet)
-    		environment.jersey().register(new ResourceDishonest(this.ip, this.port));
+    		environment.jersey().register(new ResourceDishonest(this.ip, this.port, this.APP_ID));
     	else
-    		environment.jersey().register(new Resource());
+    		environment.jersey().register(new Resource(this.APP_ID));
     }
 
     public static void main(String... args) throws Exception {
@@ -43,7 +45,7 @@ public class App extends Application<Config> {
     		strTab[0] = args[0];
     		strTab[1] = args[1];
     		
-     		new App(true, args[2], Integer.parseInt(args[3])).run(strTab);
+     		new App(true, args[2], Integer.parseInt(args[3]), args[4]).run(strTab);
     	}
     		
     }

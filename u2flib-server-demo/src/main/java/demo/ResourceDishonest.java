@@ -40,8 +40,7 @@ public class ResourceDishonest extends Resource {
 	private int port;
 	
 	public ResourceDishonest(String ip, int port, String APP_ID){
-		super(APP_ID)
-		
+		super(APP_ID);
 		this.ip = ip;
 		this.port = port;
 		

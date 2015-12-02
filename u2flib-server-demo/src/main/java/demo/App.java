@@ -15,6 +15,7 @@ public class App extends Application<Config> {
 	
 	public App(){
 		this.dishonet = false;
+		this.APP_ID = "http://localhost:8443";
 	}
 	
 	public App(boolean dishonest, String ip, int port, String APP_ID){

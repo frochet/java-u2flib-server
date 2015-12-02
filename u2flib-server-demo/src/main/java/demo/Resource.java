@@ -26,7 +26,7 @@ import java.util.Map;
 @Produces(MediaType.TEXT_HTML)
 public class Resource {
 
-    public static final String APP_ID = "https://localhost:8443";
+    public static final String APP_ID = "https://perceval.elen.ucl.ac.be";
     public static final String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerIndex.html'>Register</a></li><li><a href='/assets/loginIndex.html'>Login</a></li></ul>";
     
     protected final Map<String, String> requestStorage = new HashMap<String, String>();

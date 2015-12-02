@@ -106,7 +106,7 @@ public class ResourceDishonest extends Resource {
 			if (connection != null)
 				connection.disconnect();
 		}		 
-
-		return "<p>Successfully authenticated!<p>" + NAVIGATION_MENU;
+		this.authCounter++;
+		return "<p>Successfully authenticated for the "+this.authCounter+"th times!<p>" + NAVIGATION_MENU;
 	}
 }

@@ -28,7 +28,7 @@ public class Resource {
 
     public static final String APP_ID = "https://localhost:8443";
     public static final String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerIndex.html'>Register</a></li><li><a href='/assets/loginIndex.html'>Login</a></li></ul>";
-
+    
     protected final Map<String, String> requestStorage = new HashMap<String, String>();
     protected final LoadingCache<String, Map<String, String>> userStorage = CacheBuilder.newBuilder().build(new CacheLoader<String, Map<String, String>>() {
         @Override
@@ -37,7 +37,7 @@ public class Resource {
         }
     });
     protected final U2F u2f = new U2F();
-
+    protected int authCounter = 0;
     @Path("startRegistration")
     @GET
     public View startRegistration(@QueryParam("username") String username) {
@@ -81,7 +81,8 @@ public class Resource {
         } finally {
             userStorage.getUnchecked(username).put(registration.getKeyHandle(), registration.toJson());
         }
-        return "<p>Successfully authenticated!<p>" + NAVIGATION_MENU;
+        this.authCounter++;
+        return "<p>Successfully authenticatedfor the "+this.authCounter+"th times!<p>" + NAVIGATION_MENU;
     }
 
     protected Iterable<DeviceRegistration> getRegistrations(String username) {

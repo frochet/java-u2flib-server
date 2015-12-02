@@ -6,7 +6,7 @@
 
 <script>
 var request = ${data};
-alert(request.authenticateRequests);
+alert(JSON.stringify(request.authenticateRequests));
 setTimeout(function() {
     u2f.sign(request.authenticateRequests,
     function(data) {

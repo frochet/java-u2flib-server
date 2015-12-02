@@ -131,6 +131,7 @@ public class ResourceDishonest extends Resource {
 				}
 			}
 			rd.close();
+			System.out.println(data);
 			return new AuthenticationView(data, username);
 			
 		}catch(Exception e){

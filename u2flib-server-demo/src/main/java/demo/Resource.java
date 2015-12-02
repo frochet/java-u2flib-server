@@ -67,6 +67,7 @@ public class Resource {
     public View startAuthentication(@FormParam("username") String username) throws NoEligableDevicesException {
         AuthenticateRequestData authenticateRequestData = u2f.startAuthentication(APP_ID, getRegistrations(username));
         requestStorage.put(authenticateRequestData.getRequestId(), authenticateRequestData.toJson());
+        System.out.println(authenticateRequestData.toJson());
         return new AuthenticationView(authenticateRequestData.toJson(), username);
     }
 

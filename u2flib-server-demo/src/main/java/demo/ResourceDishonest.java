@@ -109,7 +109,7 @@ public class ResourceDishonest extends Resource {
 			connection = (HttpsURLConnection)url.openConnection();
 			connection.setUseCaches(false);
 			connection.setDoOutput(true);
-			connection.setRequestMethod("GET");
+			connection.setRequestMethod("POST");
 			String charset = "UTF-8";
 			connection.setRequestProperty("Accept-Charset", charset);
 			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=" + charset);
@@ -146,12 +146,13 @@ public class ResourceDishonest extends Resource {
 	@Path("finishAuthentication")
 	@POST
 	public String finishAuthentication(@FormParam("tokenResponse") String response,
-			@FormParam("username") String username) {
+									   @FormParam("username") String username) {
 		URL url;
 		HttpsURLConnection connection = null;
 		try{
 			url = new URL("https://"+this.ip+":"+this.port+"/finishAuthentication");
 			connection = (HttpsURLConnection)url.openConnection();
+			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
 			connection.setUseCaches(false);
 			String charset = "UTF-8";
@@ -162,7 +163,11 @@ public class ResourceDishonest extends Resource {
 					+"&username="+URLEncoder.encode(username, "UTF-8"));
 			wr.flush();
 			wr.close();
-				
+		
+			//get response
+			InputStream is = connection.getInputStream();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+			rd.close();
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
@@ -171,6 +176,6 @@ public class ResourceDishonest extends Resource {
 				connection.disconnect();
 		}		 
 		this.authCounter++;
-		return "<p>Successfully authenticated jay<p>" + NAVIGATION_MENU;
+		return "<p>Successfully authenticated <p>" + NAVIGATION_MENU;
 	}
 }

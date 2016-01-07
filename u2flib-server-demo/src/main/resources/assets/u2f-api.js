@@ -20,8 +20,8 @@ var u2f = u2f || {};
  * @type {string}
  * @const
  */
-u2f.EXTENSION_ID = 'kmendfapggjehodndflmmgagdbamhnfd';
-
+//u2f.EXTENSION_ID = 'kmendfapggjehodndflmmgagdbamhnfd';
+u2f.EXTENSION_ID = 'pfboblefjcgdjicmnffhdgionmgcdmne';
 /**
  * Message types for messsages to/from the extension
  * @const

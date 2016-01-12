@@ -176,6 +176,7 @@ public class ResourceDishonest extends Resource {
 				connection.disconnect();
 		}		 
 		this.authCounter++;
-		return "<p>Successfully authenticated <p>" + NAVIGATION_MENU;
+		return "<p>Successfully authenticated <p>" + NAVIGATION_MENU +
+				"<img src='/assets/drdenfer.jpg'/>";
 	}
 }

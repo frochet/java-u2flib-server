@@ -1,0 +1,10 @@
+server:
+  applicationConnectors:
+    - type: https
+      port: 16277
+      keyStorePath: keystore.jks
+      keyStorePassword: p@ssw0rd
+      validateCerts: false
+  adminConnectors:
+    - type: http
+      port: 9180

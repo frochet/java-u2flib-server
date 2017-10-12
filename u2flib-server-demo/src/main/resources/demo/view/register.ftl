@@ -1,6 +1,5 @@
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Java U2F Demo</title>
 
 <script src="/assets/u2f-api.js"></script>
@@ -25,7 +24,7 @@ setTimeout(function() {
 </head>
     <body>
     <p>Touch your U2F token.</p>
-        <form method="POST" action="finishRegistration" id="form" accept-charset="UTF-8">
+        <form method="POST" action="finishRegistration" id="form" onsubmit="return false;">
             <input type="hidden" name="username" value="${username}"/>
             <input type="hidden" name="tokenResponse" id="tokenResponse"/>
         </form>

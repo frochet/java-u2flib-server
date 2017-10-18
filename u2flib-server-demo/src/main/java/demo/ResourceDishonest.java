@@ -36,6 +36,7 @@ import com.yubico.u2f.exceptions.NoEligableDevicesException;
 public class ResourceDishonest extends Resource {
 
 	
+        public static String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerForum.html'>Register</a></li><li><a href='/assets/loginForum.html'>Login</a></li></ul>";
 	private String ip;
 	private int port;
 	

@@ -27,7 +27,7 @@ import java.util.Map;
 public class Resource {
 
     protected String APP_ID;
-    public static final String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerIndex.html'>Register</a></li><li><a href='/assets/loginIndex.html'>Login</a></li></ul>";
+    public static String NAVIGATION_MENU = "<h2>Navigation</h2><ul><li><a href='/assets/registerBank.html'>Register</a></li><li><a href='/assets/loginBank.html'>Login</a></li></ul>";
     
     protected final Map<String, String> requestStorage = new HashMap<String, String>();
     protected final LoadingCache<String, Map<String, String>> userStorage = CacheBuilder.newBuilder().build(new CacheLoader<String, Map<String, String>>() {
